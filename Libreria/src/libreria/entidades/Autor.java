@@ -1,20 +1,20 @@
 package libreria.entidades;
 
-import javax.persistence.Column;
+import java.io.Serializable;
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Autor {
+public class Autor implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;    
-    @Column(nullable = false)
+    @Basic
     private String nombre;
-    @Column(nullable = false)
     private Boolean alta;
 
     public Autor() {
@@ -30,9 +30,9 @@ public class Autor {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
 
     public String getNombre() {
         return nombre;
@@ -52,7 +52,7 @@ public class Autor {
 
     @Override
     public String toString() {
-        return "Autor: " + nombre;
+        return "Autor {" + "\nid: " + id + ", \nnombre: " + nombre + ", \nalta: " + alta + '}';
     }
     
 }

@@ -1,5 +1,7 @@
 package libreria.entidades;
 
+import java.io.Serializable;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -7,33 +9,22 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Libro {
+public class Libro implements Serializable {
     
     @Id
-    @Column(nullable = false)
     private Long isbn;
-    
-    @Column(nullable = false)
+    @Basic
     private String titulo;
-    
-    @Column(nullable = false)
     private Integer anio;
-    
-    @Column(nullable = false)
-    private Integer ejemplares;
-    
+    private Integer ejemplares;    
     private Integer ejemplaresPrestados;
     private Integer ejemplaresRestantes;
-    
-    @Column(nullable = false)
     private Boolean alta;
     
     @ManyToOne
-    @JoinColumn(nullable = false)
     private Autor autor;
     
     @ManyToOne
-    @JoinColumn(nullable = false)
     private Editorial editorial;
 
     public Libro() {
@@ -44,8 +35,8 @@ public class Libro {
         this.titulo = titulo;
         this.anio = anio;
         this.ejemplares = ejemplares;
-        this.ejemplaresPrestados = 0;
-        this.ejemplaresRestantes = ejemplares;
+        this.ejemplaresPrestados = ejemplaresPrestados;
+        this.ejemplaresRestantes = ejemplaresRestantes;
         this.alta = alta;
         this.autor = autor;
         this.editorial = editorial;
@@ -55,9 +46,9 @@ public class Libro {
         return isbn;
     }
 
-    public void setIsbn(Long isbn) {
-        this.isbn = isbn;
-    }
+//    public void setIsbn(Long isbn) {
+//        this.isbn = isbn;
+//    }
 
     public String getTitulo() {
         return titulo;
@@ -123,10 +114,18 @@ public class Libro {
         this.editorial = editorial;
     }
 
-    
     @Override
     public String toString() {
-        return "isbn = " + isbn + ", \ntitulo = " + titulo + ", \naño = " + anio + ", \nejemplares = " + ejemplares + ", \nejemplares prestados = " + ejemplaresPrestados + ", \nejemplares restantes = " + ejemplaresRestantes + ", \nalta = " + alta + ", \nautor = " + autor + ", \neditorial = " + editorial + '.';
-    }   
+        return "Libro {" + 
+                "\nisbn: " + isbn + ", "
+                + "\ntitulo: " + titulo + ", "
+                + "\naño: " + anio + ","
+                + " \nejemplares: " + ejemplares + ", "
+                + "\nejemplaresPrestados: " + ejemplaresPrestados + ", "
+                + "\nejemplaresRestantes: " + ejemplaresRestantes + ", "
+                + "\nalta: " + alta + ", "
+                + "\nautor: " + autor + ", "
+                + "\neditorial: " + editorial + '}';
+    }  
     
 }

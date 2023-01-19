@@ -1,19 +1,20 @@
 package libreria.entidades;
 
-import javax.persistence.Column;
+import java.io.Serializable;
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Editorial {
+public class Editorial implements Serializable {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(nullable = false)
+    @Basic
     private String nombre;
-    @Column(nullable = false)
     private Boolean alta;
 
     public Editorial() {
@@ -29,9 +30,9 @@ public class Editorial {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
 
     public String getNombre() {
         return nombre;
@@ -50,8 +51,8 @@ public class Editorial {
     }
 
     @Override
-    public String toString() {        
-        return "Editorial: " + nombre;
-    } 
+    public String toString() {
+        return "Editorial {" + "\nid: " + id + ", \nnombre: " + nombre + ", \nalta: " + alta + '}';
+    }    
     
 }
