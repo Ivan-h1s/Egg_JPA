@@ -2,10 +2,10 @@ package libreria.entidades;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
-import javax.persistence.Column;
+//import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+//import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity

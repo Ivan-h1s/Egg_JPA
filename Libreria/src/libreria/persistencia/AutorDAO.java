@@ -9,14 +9,10 @@ public class AutorDAO extends DAO<Autor>{
     @Override
     public void guardar(Autor autor) {
         try {
-            if (autor == null) {
-                System.out.println("Debe indicar un autor.");
-            }
             super.guardar(autor);
-            System.out.println("Autor guardado.");
         } catch (Exception e) { 
-            System.out.println("Error al crear un autor.");
-            throw e;             
+            System.out.println(e.getMessage());
+            e.printStackTrace();
         } finally {
             desconectar();
         }  
@@ -29,8 +25,9 @@ public class AutorDAO extends DAO<Autor>{
             idAutor = (Autor) em.find(Autor.class, id);
             return idAutor;
         } catch (Exception e) {            
-            System.out.println("No se encontró el ID del autor.");
-            throw e;        
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return null;      
         } finally {
             desconectar();
         }        
@@ -44,8 +41,9 @@ public class AutorDAO extends DAO<Autor>{
                                    .setParameter("nombre", nombre).getResultList();
             return listaAutor;
         } catch (Exception e) {
-            System.out.println("No se encontró el nombre del autor.");
-            throw e;        
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return null;       
         } finally {
             desconectar();
         }    
@@ -58,8 +56,9 @@ public class AutorDAO extends DAO<Autor>{
             getAllAutors = em.createQuery("SELECT a FROM Autor a").getResultList();
             return getAllAutors;
         } catch (Exception e) { 
-            System.out.println("No hay autores.");
-            throw e;        
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return null;      
         } finally {
             desconectar();
         }               
@@ -68,9 +67,6 @@ public class AutorDAO extends DAO<Autor>{
     public void eliminar(Integer id) throws Exception{
         Autor autor = null;
         try {
-            if (autor == null) {
-                System.out.println("Debe indicar un autor.");
-            }
             autor = buscarPorId(id);
             super.eliminar(autor);
         } catch (Exception e) {            

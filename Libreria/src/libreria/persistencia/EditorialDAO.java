@@ -8,14 +8,10 @@ public class EditorialDAO extends DAO<Editorial>{
     @Override
     public void guardar(Editorial editorial) {
         try {
-            if (editorial == null) {
-                System.out.println("Debe indicar una editorial.");
-            }
-            super.guardar(editorial);
-            System.out.println("Editorial guardada.");
+            super.guardar(editorial);          
         } catch (Exception e) { 
-            System.out.println("Error al crear una editorial.");
-            throw e;             
+            System.out.println(e.getMessage());
+            e.printStackTrace();             
         } finally {
             desconectar();
         }  
@@ -28,14 +24,15 @@ public class EditorialDAO extends DAO<Editorial>{
             idEditorial = (Editorial) em.find(Editorial.class, id);
             return idEditorial;
         } catch (Exception e) {            
-            System.out.println("No se encontró el ID de la editorial.");
-            throw e;        
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return null;
         } finally {
             desconectar();
         }        
     }
     
-    public List<Editorial> buscarEditPorNombre(String nombre) {
+    public List<Editorial> buscarEditPorNombre(String nombre) throws Exception {
         conectar();
         List<Editorial> listaEditorial = null;
         try {
@@ -43,8 +40,9 @@ public class EditorialDAO extends DAO<Editorial>{
                                    .setParameter("nombre", nombre).getResultList();
             return listaEditorial;
         } catch (Exception e) {
-            System.out.println("No se encontró el nombre de la editorial.");
-            throw e;        
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return null;       
         } finally {
             desconectar();
         }    
@@ -57,8 +55,9 @@ public class EditorialDAO extends DAO<Editorial>{
             allEditorials = em.createQuery("SELECT a FROM Editorial a").getResultList();
             return allEditorials;
         } catch (Exception e) { 
-            System.out.println("No hay editoriales.");
-            throw e;        
+            System.out.println(e.getMessage());
+            e.printStackTrace(); 
+            return null;
         } finally {
             desconectar();
         }               
@@ -67,16 +66,14 @@ public class EditorialDAO extends DAO<Editorial>{
     public void eliminarEdit(Integer id) throws Exception{
         Editorial editorial = null;
         try {
-            if (editorial == null) {
-                System.out.println("Debe indicar una editorial.");
-            }
             editorial = buscarEditPorId(id);
             super.eliminar(editorial);
         } catch (Exception e) {            
-            System.out.println("Error al eliminar editorial.");
-            throw e;        
+            System.out.println(e.getMessage());
+            e.printStackTrace();
         } finally {
             desconectar();
         }        
     }
+    
 }
