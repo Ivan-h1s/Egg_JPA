@@ -1,6 +1,7 @@
 package libreria.persistencia;
 
 import java.util.List;
+import libreria.entidades.Autor;
 import libreria.entidades.Libro;
 
 public class LibroDAO extends DAO<Libro>{
