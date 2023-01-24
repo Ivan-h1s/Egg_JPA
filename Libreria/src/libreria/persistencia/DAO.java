@@ -5,9 +5,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class DAO<T> {
+public class DAO<T> extends Object{
     
-    protected EntityManagerFactory EMF = Persistence.createEntityManagerFactory("libreriaPU");
+    protected EntityManagerFactory EMF = Persistence.createEntityManagerFactory("LibreriaPU");
     protected EntityManager em = EMF.createEntityManager();
     
     // método para conectar con la base de datos.

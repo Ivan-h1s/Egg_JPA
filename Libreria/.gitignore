@@ -1,4 +1,4 @@
-#src
+src
 /nbproject/private/
 build/
 !**src/test/**build/
